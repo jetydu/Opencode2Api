@@ -1,29 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<PublishAot>true</PublishAot>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="NLog.Web.AspNetCore" Version="6.2.2" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="NLog.Web.AspNetCore" Version="6.2.2" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <!-- 真正的 OpenCode CLI 2.x 工具定义，在 /inference 免费线路上原样转发
+	<ItemGroup>
+		<!-- 真正的 OpenCode CLI 2.x 工具定义，在 /inference 免费线路上原样转发
          （Go: //go:embed opencode_tools.json）。 -->
-    <EmbeddedResource Include="Gateway\opencode_tools.json" />
-  </ItemGroup>
+		<EmbeddedResource Include="Gateway\opencode_tools.json" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <!-- NLog 配置文件随输出目录发布，程序启动时从内容根目录读取。 -->
-    <None Update="nlog.config" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
-  </ItemGroup>
+	<ItemGroup>
+		<!-- NLog 配置文件随输出目录发布，程序启动时从内容根目录读取。 -->
+		<None Update="nlog.config" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <!-- 单元测试需要访问 internal 成员（网关各内部状态机与解析器）。 -->
-    <InternalsVisibleTo Include="Opencode2Api.Tests" />
-  </ItemGroup>
+	<ItemGroup>
+		<!-- 单元测试需要访问 internal 成员（网关各内部状态机与解析器）。 -->
+		<InternalsVisibleTo Include="Opencode2Api.Tests" />
+	</ItemGroup>
 
 </Project>
